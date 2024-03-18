@@ -29,11 +29,16 @@ class Graph:
 
             # for each vertex, create a linked list by looking at edges
             for j in range(len(self.edges)):
-                # create a node if there is an edge which has first coord = 0, and assign to linked list
-                if list(g.edges)[j][0] == list(self.vertices)[i]:
-                    temp_node = Node(list(g.edges)[j][1])
+                if list(self.vertices)[i] in list(g.edges)[j]:
+                    # create node depending on what coordinate was matched
+                    if list(g.edges)[j][0] == list(self.vertices)[i]:
+                        temp_node = Node(list(g.edges)[j][1])
+                    if list(g.edges)[j][1] == list(self.vertices)[i]:
+                        temp_node = Node(list(g.edges)[j][0])
+
                     # set the next value to be this new node
                     input_node.next = temp_node
+
                     # set the next input to be the newly created node
                     input_node = temp_node
 
@@ -58,3 +63,5 @@ V = {0,1,2,3}
 E = {(0,1), (0,2), (0,3), (1,2)}
 
 g = Graph(V, E)
+
+g.adjacency_list()
